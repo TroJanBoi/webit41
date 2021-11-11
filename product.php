@@ -1,6 +1,4 @@
-
 <?php
-
     include 'navbar.php';
     require_once 'config.php';
     $sql = "SELECT * FROM product";
