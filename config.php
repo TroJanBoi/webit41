@@ -6,12 +6,10 @@
     $dbname = 'planetco_64309010012';
 */
     /*
-    
         $host = 'localhost';
         $user = 'root';
         $pass = '';
         $dbname = 'webit41'
-
      */
     $con = mysqli_connect("localhost","root","","webit41");
     $con->query('SET NAMES UTF8');
