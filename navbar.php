@@ -1,7 +1,8 @@
 <?php
   require_once 'config.php';
-  $session_id = $_SESSION['emp_id'];
-  $old_data=mysqli_fetch_array($con->query("SELECT * FROM employee WHERE emp_id = '$session_id'"));
+  @session_start();
+  @$session_id = $_SESSION['emp_id'];
+  @$old_data=mysqli_fetch_array($con->query("SELECT * FROM employee WHERE emp_id = '$session_id'"));
 
 ?>
 
