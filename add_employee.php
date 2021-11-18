@@ -3,21 +3,35 @@
     require_once 'config.php';  
     if(isset($_POST['submit'])){
         $emp_id = $_POST['emp_id'];
+        $username = $_POST['username'];
+        $password = $_POST['password'];
         $emp_name = $_POST['emp_name'];
         $tel = $_POST['tel'];
         $email = $_POST['email'];
-        if($emp_id=='' || $emp_name=='' || $tel=='' || $email==''){
+        if($emp_id=='' || $username == '' || $password == ''|| $emp_name=='' || $tel=='' || $email=='' ){
             echo "<script>alert('คุณยังไม่ได้กรอกข้อมูล');</script>";
         }else{
-            $sql = "INSERT INTO employee VALUES('$emp_id','$emp_name','$tel','$email')";
-            $result = $con->query($sql);
-            if(!$result){
-                echo "<script>alert('ERROR : ไม่สามารถเพิ่มข้อมูลได้ กรุณาตรวจสอบข้อผิดพลาด');</script>";   
+            $old_data = mysqli_fetch_array($con->query("SELECT * FROM employee"));
+            if($old_data['emp_name'] == $emp_name){
+                echo "<script>alert('ชื่อพนักงานนี้มีอยู่แล้ว')</script>";
+            }else if($old_data['tel'] == $tel){
+                echo "<script>alert('เบอร์นี้มีอยู่แล้ว')</script>";
+            }else if($old_data['email'] == $email){
+                echo "<script>alert('E-mail นี้มีอยู่แล้ว')</script>";
+            }else if($old_data['username'] == $username){
+                echo "<script>alert('Username นี้มีอยู่แล้ว')</script>";
             }else{
-                echo "<script>window.location.href='employee.php';</script>";
+                //$save_pass = md5($password);
+                $sql = "INSERT INTO employee VALUES('$emp_id','$username','$password','$emp_name','$tel','$email')";
+                $result = $con->query($sql);
+                if(!$result){
+                    echo "<script>alert('ERROR : ไม่สามารถเพิ่มข้อมูลได้ กรุณาตรวจสอบข้อผิดพลาด');</script>";   
+                }else{
+                    echo "<script>window.location.href='employee.php';</script>";
+                }
             }
-        }
     }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,6 +53,14 @@
                     <div class="mb-3">
                         <label for="" class="form-label">รหัสพนักงาน</label>
                         <input type="text" class="form-control" name="emp_id">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Username</label>
+                        <input type="text" class="form-control" name="username">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Password</label>
+                        <input type="password" class="form-control" name="password">
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">ชื่อพนักงาน</label>
