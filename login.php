@@ -14,10 +14,8 @@
             $_SESSION['emp_id'] = $row['emp_id'];
         }else{
             echo "<script>alert('Username Or Password ไม่ถูกต้อง')</script>";
-
         }
     }
-
 ?>
 
 <!DOCTYPE html>
