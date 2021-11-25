@@ -1,26 +1,16 @@
 <?php
     include 'navbar.php';
     require_once 'config.php';
-    $sql = "SELECT * FROM product";
-    $result = $con->query($sql);
+    $keyword = $_POST['keyword'];
+    $sql="SELECT * FROM product WHERE pro_id like'%$keyword%' or pro_name like'%$keyword%'";
+    $result=$con->query($sql);
 ?>
 <div class="container w-50 mt-5">
     <div class="row d-flex justify-content-between">
         <div class="col-auto">
             <a href="add_product.php" class="btn btn-success mb-2">เพิ่มสินค้า</a>
         </div>
-        <div class="col-auto">
-            <form action="search_product.php" class="row" method="post">
-                <div class="col-auto">
-                    <input type="text" class="form-control" name="keyword" placeholder="ใส่หรัสหรือชื่อสินค้า">
-                </div>
-                <div class="col-auto">
-                    <button type="submit" name="search" class="btn btn-success">ค้นหา</button>
-                </div>
-            </form>
-        </div>
     </div>
-    
     <div class="card">
         <div class="card-header bg-danger text-white">
             ข้อมูลสินค้า
